@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <description>$description$</description>
+    <authors>$authors$</authors>
+    <owners>$owners$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes />
+    <copyright>$copyright$</copyright>
+    <tags>$tags$</tags>
+  </metadata>
+</package>

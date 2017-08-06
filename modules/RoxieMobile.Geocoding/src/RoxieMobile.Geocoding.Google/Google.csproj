@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Includes a model and interface for communicating with Google Maps geocoding provider. The API returns latitude/longitude coordinates and normalized address information. Based on fork of ‘chadly/Geocoding.net’ project.</Description>
+    <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
+    <VersionPrefix>4.0.0</VersionPrefix>
+    <Authors>Chad Lee;Alexander Bragin</Authors>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>RoxieMobile.Geocoding.Google</AssemblyName>
+    <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
+    <PackageId>$(AssemblyName)</PackageId>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <PackageTags>geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
+    <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <BaseOutputPath>.build/bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>.build/obj</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="System.Xml.XPath" Version="4.3.0" />
+    <PackageReference Include="Geocoding.Core" Version="4.0.0" />
+  </ItemGroup>
+</Project>
