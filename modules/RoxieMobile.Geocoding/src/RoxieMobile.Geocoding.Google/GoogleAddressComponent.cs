@@ -10,11 +10,12 @@ namespace RoxieMobile.Geocoding.Google
 
 		public GoogleAddressComponent(GoogleAddressType[] types, string longName, string shortName)
 		{
-			if (types == null)
-				throw new ArgumentNullException("types");
-
-			if (types.Length < 1)
-				throw new ArgumentException("Value cannot be empty.", "types");
+			if (types == null) {
+				throw new ArgumentNullException(nameof(types));
+			}
+			if (types.Length < 1) {
+				throw new ArgumentException("Value cannot be empty.", nameof(types));
+			}
 
 			this.Types = types;
 			this.LongName = longName;
