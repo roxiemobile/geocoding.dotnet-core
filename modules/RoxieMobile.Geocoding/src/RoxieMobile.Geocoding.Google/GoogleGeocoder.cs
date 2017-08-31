@@ -132,48 +132,67 @@ namespace RoxieMobile.Geocoding.Google
 			}
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address)
+		public async Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address) =>
+			await GeocodeAsync(address, CancellationToken.None);
+
+		public async Task<IEnumerable<GoogleAddress>> GeocodeAsync(
+			string address,
+			CancellationToken cancellationToken)
 		{
-			if (string.IsNullOrEmpty(address))
-				throw new ArgumentNullException("address");
+			if (string.IsNullOrEmpty(address)) {
+				throw new ArgumentNullException(nameof(address));
+			}
 
 			var request = BuildWebRequest("address", WebUtility.UrlEncode(address));
-			return await ProcessRequest(request).ConfigureAwait(false);
+			return await ProcessRequest(request, cancellationToken).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(Location location)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(Location location) =>
+			await ReverseGeocodeAsync(location, CancellationToken.None);
+
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(
+			Location location,
+			CancellationToken cancellationToken)
 		{
-			if (location == null)
-				throw new ArgumentNullException("location");
-
-			return await ReverseGeocodeAsync(location.Latitude, location.Longitude).ConfigureAwait(false);
+			if (location == null) {
+				throw new ArgumentNullException(nameof(location));
+			}
+			return await ReverseGeocodeAsync(location.Latitude, location.Longitude, cancellationToken).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(double latitude, double longitude)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(double latitude, double longitude) =>
+			await ReverseGeocodeAsync(latitude, longitude, CancellationToken.None);
+
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(
+			double latitude,
+			double longitude,
+			CancellationToken cancellationToken)
 		{
 			var request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
-			return await ProcessRequest(request).ConfigureAwait(false);
+			return await ProcessRequest(request, cancellationToken).ConfigureAwait(false);
 		}
 
-		private string BuildAddress(string street, string city, string state, string postalCode, string country)
+		private static string BuildAddress(string street, string city, string state, string postalCode, string country)
 		{
 			return $"{street} {city}, {state} {postalCode}, {country}";
 		}
 
-		private string BuildGeolocation(double latitude, double longitude)
+		private static string BuildGeolocation(double latitude, double longitude)
 		{
 			return string.Format(CultureInfo.InvariantCulture, "{0:0.00000000},{1:0.00000000}", latitude, longitude);
 		}
 
-		private async Task<IEnumerable<GoogleAddress>> ProcessRequest(HttpRequestMessage request)
+		private async Task<IEnumerable<GoogleAddress>> ProcessRequest(
+			HttpRequestMessage request,
+			CancellationToken cancellationToken)
 		{
 			try {
 				if (_messageInvoker != null) {
-					return await ProcessRequestInternal(_messageInvoker, request);
+					return await ProcessRequestInternalAsync(_messageInvoker, request, cancellationToken);
 				}
 
 				using (var client = BuildClient()) {
-					return await ProcessRequestInternal(client, request);
+					return await ProcessRequestInternalAsync(client, request, cancellationToken);
 				}
 			}
 			catch (GoogleGeocodingException)
@@ -188,11 +207,12 @@ namespace RoxieMobile.Geocoding.Google
 			}
 		}
 
-		private async Task<IEnumerable<GoogleAddress>> ProcessRequestInternal(
+		private async Task<IEnumerable<GoogleAddress>> ProcessRequestInternalAsync(
 			HttpMessageInvoker httpMessageInvoker,
-			HttpRequestMessage request)
+			HttpRequestMessage request,
+			CancellationToken cancellationToken)
 		{
-			var response = await httpMessageInvoker.SendAsync(request, CancellationToken.None).ConfigureAwait(false);
+			var response = await httpMessageInvoker.SendAsync(request, cancellationToken).ConfigureAwait(false);
 			return await ProcessWebResponse(response).ConfigureAwait(false);
 		}
 
