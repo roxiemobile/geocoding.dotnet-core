@@ -7,8 +7,8 @@
     <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
     <Authors>Chad Lee;Alexander Bragin</Authors>
     <PackageTags>geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
     <PackageId>$(AssemblyName)</PackageId>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <BaseOutputPath>.build/bin</BaseOutputPath>
