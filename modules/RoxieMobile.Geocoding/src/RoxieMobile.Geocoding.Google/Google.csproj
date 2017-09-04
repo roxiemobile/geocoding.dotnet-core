@@ -4,9 +4,10 @@
     <VersionPrefix>0.1.1</VersionPrefix>
     <Title>$(AssemblyName)</Title>
     <Description>Includes a model and interface for communicating with Google Maps geocoding provider. The API returns latitude/longitude coordinates and normalized address information. Based on fork of ‘chadly/Geocoding.net’ project.</Description>
-    <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/roxiemobile/geocoding.dotnet-core</PackageProjectUrl>
     <Authors>Chad Lee;Alexander Bragin</Authors>
-    <PackageTags>geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
+    <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
+    <PackageTags>c#;.netcore;geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
     <PackageId>$(AssemblyName)</PackageId>
