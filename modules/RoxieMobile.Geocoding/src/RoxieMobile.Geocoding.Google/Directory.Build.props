@@ -1,0 +1,10 @@
+<!--
+// Setting BaseIntermediateOutputPath breaks netstandard2.0 builds
+// @link https://github.com/dotnet/sdk/issues/1518#issuecomment-324638682
+-->
+<Project>
+  <PropertyGroup>
+    <BaseOutputPath>$(MSBuildThisFileDirectory).build/bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory).build/obj</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
