@@ -9,13 +9,13 @@
     <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
     <PackageTags>c#;.netcore;geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
     <PackageId>$(AssemblyName)</PackageId>
     <RootNamespace>$(AssemblyName)</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Geocoding.Core" Version="4.0.0" />
-    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="Geocoding.Core" Version="4.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.3" />
     <PackageReference Include="System.Xml.XPath" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
