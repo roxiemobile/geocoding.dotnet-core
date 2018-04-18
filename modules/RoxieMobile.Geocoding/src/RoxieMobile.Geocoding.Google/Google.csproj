@@ -9,7 +9,7 @@
     <Copyright>© Roxie Mobile Ltd. All rights reserved.</Copyright>
     <PackageTags>c#;.netcore;geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps</PackageTags>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RuntimeFrameworkVersion>2.0.5</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>2.0.7</RuntimeFrameworkVersion>
     <PackageId>$(AssemblyName)</PackageId>
     <RootNamespace>$(AssemblyName)</RootNamespace>
   </PropertyGroup>
