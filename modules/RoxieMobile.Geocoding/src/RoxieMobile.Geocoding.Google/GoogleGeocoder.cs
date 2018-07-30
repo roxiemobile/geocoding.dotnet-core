@@ -18,10 +18,10 @@ namespace RoxieMobile.Geocoding.Google
 	/// </remarks>
 	public class GoogleGeocoder : IGeocoder
 	{
-		string apiKey;
-		BusinessKey businessKey;
-		const string keyMessage = "Only one of BusinessKey or ApiKey should be set on the GoogleGeocoder.";
-		private HttpMessageInvoker _messageInvoker;
+		private string apiKey;
+		private BusinessKey businessKey;
+		private const string keyMessage = "Only one of BusinessKey or ApiKey should be set on the GoogleGeocoder.";
+		private readonly HttpMessageInvoker _messageInvoker;
 
 		public GoogleGeocoder() { }
 
@@ -42,7 +42,7 @@ namespace RoxieMobile.Geocoding.Google
 
 		public string ApiKey
 		{
-			get { return apiKey; }
+			get => apiKey;
 			set
 			{
 				if (businessKey != null)
@@ -56,7 +56,7 @@ namespace RoxieMobile.Geocoding.Google
 
 		public BusinessKey BusinessKey
 		{
-			get { return businessKey; }
+			get => businessKey;
 			set
 			{
 				if (!string.IsNullOrEmpty(apiKey))
@@ -221,8 +221,7 @@ namespace RoxieMobile.Geocoding.Google
 			if (this.Proxy == null)
 				return new HttpClient();
 
-			var handler = new HttpClientHandler();
-			handler.Proxy = this.Proxy;
+			var handler = new HttpClientHandler {Proxy = this.Proxy};
 			return new HttpClient(handler);
 		}
 
@@ -323,8 +322,7 @@ namespace RoxieMobile.Geocoding.Google
 					bounds = new Bounds(swBoundsCoordinates, neBoundsCoordinates);
 				}
 
-				bool isPartialMatch;
-				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
+				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out var isPartialMatch);
 
 				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, bounds, isPartialMatch, locationType, placeId);
 			}
@@ -370,7 +368,7 @@ namespace RoxieMobile.Geocoding.Google
 		/// <remarks>
 		/// http://code.google.com/apis/maps/documentation/geocoding/#Types
 		/// </remarks>
-		private GoogleAddressType EvaluateType(string type)
+		private static GoogleAddressType EvaluateType(string type)
 		{
 			switch (type)
 			{
@@ -382,29 +380,37 @@ namespace RoxieMobile.Geocoding.Google
 				case "administrative_area_level_1": return GoogleAddressType.AdministrativeAreaLevel1;
 				case "administrative_area_level_2": return GoogleAddressType.AdministrativeAreaLevel2;
 				case "administrative_area_level_3": return GoogleAddressType.AdministrativeAreaLevel3;
+				case "administrative_area_level_4": return GoogleAddressType.AdministrativeAreaLevel4;
+				case "administrative_area_level_5": return GoogleAddressType.AdministrativeAreaLevel5;
 				case "colloquial_area": return GoogleAddressType.ColloquialArea;
 				case "locality": return GoogleAddressType.Locality;
+				case "ward": return GoogleAddressType.Ward;
 				case "sublocality": return GoogleAddressType.SubLocality;
-				case "neighborhood": return GoogleAddressType.Neighborhood;
-				case "premise": return GoogleAddressType.Premise;
-				case "subpremise": return GoogleAddressType.Subpremise;
-				case "postal_code": return GoogleAddressType.PostalCode;
-				case "natural_feature": return GoogleAddressType.NaturalFeature;
-				case "airport": return GoogleAddressType.Airport;
-				case "park": return GoogleAddressType.Park;
-				case "point_of_interest": return GoogleAddressType.PointOfInterest;
-				case "post_box": return GoogleAddressType.PostBox;
-				case "street_number": return GoogleAddressType.StreetNumber;
-				case "floor": return GoogleAddressType.Floor;
-				case "room": return GoogleAddressType.Room;
-				case "postal_town": return GoogleAddressType.PostalTown;
-				case "establishment": return GoogleAddressType.Establishment;
 				case "sublocality_level_1": return GoogleAddressType.SubLocalityLevel1;
 				case "sublocality_level_2": return GoogleAddressType.SubLocalityLevel2;
 				case "sublocality_level_3": return GoogleAddressType.SubLocalityLevel3;
 				case "sublocality_level_4": return GoogleAddressType.SubLocalityLevel4;
 				case "sublocality_level_5": return GoogleAddressType.SubLocalityLevel5;
+				case "neighborhood": return GoogleAddressType.Neighborhood;
+				case "premise": return GoogleAddressType.Premise;
+				case "subpremise": return GoogleAddressType.Subpremise;
+				case "postal_code": return GoogleAddressType.PostalCode;
+				case "postal_code_prefix": return GoogleAddressType.PostalCodePrefix;
 				case "postal_code_suffix": return GoogleAddressType.PostalCodeSuffix;
+				case "natural_feature": return GoogleAddressType.NaturalFeature;
+				case "airport": return GoogleAddressType.Airport;
+				case "park": return GoogleAddressType.Park;
+				case "point_of_interest": return GoogleAddressType.PointOfInterest;
+				case "floor": return GoogleAddressType.Floor;
+				case "establishment": return GoogleAddressType.Establishment;
+				case "parking": return GoogleAddressType.Parking;
+				case "post_box": return GoogleAddressType.PostBox;
+				case "postal_town": return GoogleAddressType.PostalTown;
+				case "room": return GoogleAddressType.Room;
+				case "street_number": return GoogleAddressType.StreetNumber;
+				case "bus_station": return GoogleAddressType.BusStation;
+				case "train_station": return GoogleAddressType.TrainStation;
+				case "transit_station": return GoogleAddressType.TransitStation;
 
 				default: return GoogleAddressType.Unknown;
 			}
@@ -413,7 +419,7 @@ namespace RoxieMobile.Geocoding.Google
 		/// <remarks>
 		/// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
 		/// </remarks>
-		private GoogleLocationType EvaluateLocationType(string type)
+		private static GoogleLocationType EvaluateLocationType(string type)
 		{
 			switch (type)
 			{

@@ -1,7 +1,8 @@
 namespace RoxieMobile.Geocoding.Google
 {
 	/// <remarks>
-	/// http://code.google.com/apis/maps/documentation/geocoding/#Types
+	/// https://developers.google.com/maps/documentation/geocoding/intro#Types
+	/// https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding
 	/// </remarks>
 	public enum GoogleAddressType
 	{
@@ -14,28 +15,36 @@ namespace RoxieMobile.Geocoding.Google
 		AdministrativeAreaLevel1,
 		AdministrativeAreaLevel2,
 		AdministrativeAreaLevel3,
+		AdministrativeAreaLevel4,
+		AdministrativeAreaLevel5,
 		ColloquialArea,
 		Locality,
+		Ward,
 		SubLocality,
-		Neighborhood,
-		Premise,
-		Subpremise,
-		PostalCode,
-		NaturalFeature,
-		Airport,
-		Park,
-		PointOfInterest,
-		PostBox,
-		StreetNumber,
-		Floor,
-		Room,
-		PostalTown,
-		Establishment,
 		SubLocalityLevel1,
 		SubLocalityLevel2,
 		SubLocalityLevel3,
 		SubLocalityLevel4,
 		SubLocalityLevel5,
-		PostalCodeSuffix
+		Neighborhood,
+		Premise,
+		Subpremise,
+		PostalCode,
+		PostalCodePrefix,
+		PostalCodeSuffix,
+		NaturalFeature,
+		Airport,
+		Park,
+		PointOfInterest,
+		Floor,
+		Establishment,
+		Parking,
+		PostBox,
+		PostalTown,
+		Room,
+		StreetNumber,
+		BusStation,
+		TrainStation,
+		TransitStation,
 	}
 }
